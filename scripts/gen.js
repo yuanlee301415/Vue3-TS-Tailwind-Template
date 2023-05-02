@@ -160,7 +160,7 @@ class Gen {
       meta: {
         title: "${this.titles[1]}"
       }
-    }`;
+    },`;
     this.routeCode = routeRaw.replace(
       childrenReg,
       `$1[$2\n\t${childRouteCode}\n\t]`

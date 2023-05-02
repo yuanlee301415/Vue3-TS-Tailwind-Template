@@ -18,7 +18,7 @@ const ${upperNames[0]}_ROUTE: AppRouteRecordRaw = {
       meta: {
         title: "${titles[1] ?? titles[0]}"
       }
-    }
+    },
   ]
 };
 
