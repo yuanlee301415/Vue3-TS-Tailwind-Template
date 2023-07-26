@@ -3,7 +3,6 @@ import type { DefineComponent } from 'vue'
 
 export type Component<T = any> =
   | DefineComponent
-  | (() => Promise<typeof import('*.vue')>)
   | (() => Promise<T>)
 
 export type AppRouteMeta = RouteMeta &
