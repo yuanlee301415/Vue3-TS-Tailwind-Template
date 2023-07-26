@@ -15,10 +15,6 @@ module.exports = {
   rules: {
     "vue/multi-word-component-names": 0
   },
-  "globals": {
-    "__APP_VERSION__": "readonly",
-    "__APP_BUILD_TIME__": "readonly"
-  },
   env: {
     node: true
   }
