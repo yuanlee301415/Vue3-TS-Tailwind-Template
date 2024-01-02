@@ -1,6 +1,6 @@
 {
   "name": "vue3-ts-tailwind-template",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Vue3 + TS + Tailwind 模板",
   "private": true,
   "scripts": {
