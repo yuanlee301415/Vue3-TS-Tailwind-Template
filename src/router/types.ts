@@ -1,9 +1,7 @@
 import type { RouteMeta, RouteRecordRaw } from 'vue-router'
 import type { DefineComponent } from 'vue'
 
-export type Component<T = any> =
-  | DefineComponent
-  | (() => Promise<T>)
+export type Component<T = any> = DefineComponent | (() => Promise<T>)
 
 export type AppRouteMeta = RouteMeta &
   Partial<{
