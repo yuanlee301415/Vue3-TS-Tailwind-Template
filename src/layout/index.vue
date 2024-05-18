@@ -22,7 +22,8 @@ import LayoutContent from './Content/index.vue'
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
   .sideBar {
     position: fixed;
     width: @sideWidth;
@@ -31,8 +32,13 @@ import LayoutContent from './Content/index.vue'
   }
   main {
     margin-left: @sideWidth;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     .content {
       padding: 10px;
+      flex: 1;
+      overflow: auto;
     }
   }
 }
