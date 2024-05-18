@@ -16,7 +16,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const {
     VITE_PORT,
     VITE_INTERNAL_VERSION,
-    VITE_APP_TITLE,
     VITE_PERMISSION,
     VITE_BASE_API,
     VITE_PROXY,
@@ -40,7 +39,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         minify: true,
         inject: {
           data: {
-            title: VITE_APP_TITLE,
             version: __APP_VERSION__,
             time: __APP_BUILD_TIME__,
             mode,
