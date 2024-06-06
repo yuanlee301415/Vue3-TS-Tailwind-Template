@@ -1,5 +1,4 @@
 import type { AxiosResponse } from 'axios'
-import type { Result } from '#/axios'
 
 import axios from 'axios'
 
@@ -10,14 +9,10 @@ const request = axios.create({
 
 // 添加响应拦截器
 request.interceptors.response.use(
-  function (response: AxiosResponse<Result>) {
+  function (response: AxiosResponse) {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
-    const data = response.data
-    if (data.code !== 0) {
-      throw new Error(data.message ?? '系统异常')
-    }
-    return data.data
+    return response.data
   },
   function (error) {
     // 超出 2xx 范围的状态码都会触发该函数。

@@ -2,13 +2,9 @@ import type UserInfoModel from '@/models/UserInfoModel'
 
 import request from '@/utils/http/axios'
 
-export enum UserApi {
-  GetUserInfo = 'user/1003'
-}
-
-export function getUserInfo(): Promise<UserInfoModel> {
+export function getUserInfo(id: number = 1): Promise<UserInfoModel> {
   return request({
     method: 'get',
-    url: UserApi.GetUserInfo
+    url: `users/${id}`
   })
 }
