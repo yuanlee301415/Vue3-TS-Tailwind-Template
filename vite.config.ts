@@ -16,7 +16,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
   const {
     VITE_PORT,
     VITE_INTERNAL_VERSION,
-    VITE_PERMISSION,
     VITE_BASE_API,
     VITE_PROXY,
   } = env;
@@ -28,7 +27,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     name: pkg.name,
     version: pkg.version,
   };
-  console.log("env:\n", env);
+  console.log("ENV:\n", env);
 
   return {
     plugins: [
@@ -54,12 +53,11 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     server: {
       port: Number(VITE_PORT),
       proxy:
-        VITE_PERMISSION && JSON.parse(VITE_PERMISSION)
-          ? {
+        VITE_PROXY ? {
               [VITE_BASE_API]: {
                 target: VITE_PROXY,
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/api\//, "/api/v1/"),
+                rewrite: (path) => path.replace(VITE_BASE_API, ""),
               },
             }
           : undefined,
