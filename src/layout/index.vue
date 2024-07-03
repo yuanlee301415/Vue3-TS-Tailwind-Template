@@ -4,7 +4,7 @@
 
     <main>
       <LayoutHeader />
-      <LayoutContent class="content" />
+      <LayoutContent />
     </main>
   </section>
 </template>
