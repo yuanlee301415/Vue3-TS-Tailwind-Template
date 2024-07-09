@@ -46,7 +46,7 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
   children: [
     {
       path: '',
-      name: PAGE_NOT_FOUND_NAME,
+      name: PAGE_NOT_FOUND_NAME + 'Page',
       component: EXCEPTION_404,
       meta: {}
     }
