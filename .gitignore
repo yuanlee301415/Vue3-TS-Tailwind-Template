@@ -13,7 +13,6 @@ dist
 dist-ssr
 coverage
 *.local
-/server/db.json5
 
 /cypress/videos/
 /cypress/screenshots/
@@ -27,3 +26,8 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+*.tsbuildinfo
+
+/server/db.json5
+/Todo/
