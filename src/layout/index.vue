@@ -28,17 +28,19 @@ import LayoutContent from './Content/index.vue'
     position: fixed;
     width: @sideWidth;
     height: 100vh;
-    background-color: #001529;
   }
   main {
+    height: 100%;
     margin-left: @sideWidth;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     .content {
+      background-color: var(--color-background);
       padding: 10px;
       flex: 1;
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
   }
 }

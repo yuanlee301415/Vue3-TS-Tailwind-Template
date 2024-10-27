@@ -27,7 +27,7 @@ const VITE_APP_TITLE = import.meta.env.VITE_APP_TITLE
   cursor: pointer;
   h2 {
     font-weight: 700;
-    color: #fff;
+    color: var(--color-heading);
     font-size: 16px;
     line-height: normal;
     margin-left: 0.5rem;
