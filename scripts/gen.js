@@ -2,23 +2,23 @@
 /* eslint-disable */
 
 /**
- * 接收参数1：路由名称1[/路由名称2]
+ * 接收参数1-路由英文名称，用于生成 `Router name`：路由名称1[/路由名称2]
  *  1.单个路由名称，必须是合法的 JS 变量名
  *  2.会将其全部大写后，注入到 router 的 JS 代码中
  *  3.会将其全部小写后，做为页面 URL 路径
  *
- * 接收参数2：页面标题1[/页面标题2]
+ * 接收参数2-路由英文名称，用于生成 `Router meta title`：页面标题1[/页面标题2]
  *  1.支持中文
  *  2.会将其内容原样做为对应的菜单项文本
  *
  * 调用方式：`npm run gen 路由名称1[/路由名称2] 页面标题1[/页面标题2] `
  */
+import { resolve, join } from "node:path";
+import { statSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
 
-const path = require("path");
-const fs = require("fs");
 const cwd = process.cwd();
 const [, , nameArg, titleArg] = process.argv;
-const routeDir = path.resolve(cwd, "src/router/routes");
+const routeDir = resolve(cwd, "src/router/routes");
 const childrenReg = /(children:\s)\[(.*?)\]/is;
 const upperName = (name) => name.toUpperCase();
 const lowerName = (name) => name.toLowerCase();
@@ -70,12 +70,12 @@ class Gen {
       throw new Error("name 或 title 嵌套层级数不一致");
     }
 
-    const dir = path.join(cwd, "src/views/" + this.lowerNames[0]);
+    const dir = join(cwd, "src/views/" + this.lowerNames[0]);
     try {
-      fs.statSync(dir);
+      statSync(dir);
       this.dir = this.lowerNames[0];
     } catch (err) {
-      fs.mkdirSync(dir);
+      mkdirSync(dir);
     }
     this.hiddenChildrenInMenu = false;
     this.genView();
@@ -91,8 +91,8 @@ class Gen {
 
   // 生成视图文件
   genView() {
-    const viewTemp = fs.readFileSync(
-      path.join(cwd, "scripts/__viewTemplate.tpl"),
+    const viewTemp = readFileSync(
+      join(cwd, "scripts/__viewTemplate.tpl"),
       "utf-8"
     );
     const viewCode = new Function(
@@ -101,18 +101,18 @@ class Gen {
       "return " + "`" + viewTemp + "`"
     )(this.capitalNames.join("/"), this.titles.join("/"));
 
-    const filePath = path.join(
+    const filePath = join(
       cwd,
       `src/views/${this.lowerNames.join("//")}.vue`
     );
-    fs.writeFileSync(filePath, viewCode, "utf-8");
+    writeFileSync(filePath, viewCode, "utf-8");
     this.print(`Created view file: "${filePath}"`);
   }
 
   // 生成初始的路由文件
   genInitialRoute() {
-    const routeIndexRaw = fs.readFileSync(
-      path.join(routeDir, "index.ts"),
+    const routeIndexRaw = readFileSync(
+      join(routeDir, "index.ts"),
       "utf-8"
     );
     const routeIndexCode = routeIndexRaw
@@ -124,11 +124,11 @@ class Gen {
         "// NESTED_ROUTE,",
         `${this.upperNames[0]}_ROUTE,\n// NESTED_ROUTE,`
       );
-    const routeTemp = fs.readFileSync(
-      path.join(cwd, "scripts/__routeTemplate.tpl"),
+    const routeTemp = readFileSync(
+      join(cwd, "scripts/__routeTemplate.tpl"),
       "utf-8"
     );
-    const filePath = path.join(routeDir, "index.ts");
+    const filePath = join(routeDir, "index.ts");
     this.routeCode = new Function(
       "capitalNames",
       "upperNames",
@@ -143,14 +143,14 @@ class Gen {
       this.titles,
       this.hiddenChildrenInMenu
     );
-    fs.writeFileSync(filePath, routeIndexCode, "utf-8");
+    writeFileSync(filePath, routeIndexCode, "utf-8");
     this.print(`Updated route index file: "${filePath}"`);
   }
 
   // 添加子路由
   addChildRoute() {
-    const routeRaw = fs.readFileSync(
-      path.join(routeDir, `modules/${this.dir}.ts`),
+    const routeRaw = readFileSync(
+      join(routeDir, `modules/${this.dir}.ts`),
       "utf-8"
     );
     const childRouteCode = `{
@@ -169,9 +169,9 @@ class Gen {
 
   // 生成路由文件
   genRoute() {
-    const filePath = path.join(routeDir, `modules/${this.lowerNames[0]}.ts`);
+    const filePath = join(routeDir, `modules/${this.lowerNames[0]}.ts`);
     this.dir ? this.addChildRoute() : this.genInitialRoute();
-    fs.writeFileSync(filePath, this.routeCode, "utf-8");
+    writeFileSync(filePath, this.routeCode, "utf-8");
     this.print(`Updated route file: "${filePath}"`);
   }
 
