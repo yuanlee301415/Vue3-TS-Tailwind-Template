@@ -96,10 +96,10 @@ class Gen {
       "utf-8"
     );
     const viewCode = new Function(
-      "name",
+      "capitalNames",
       "title",
       "return " + "`" + viewTemp + "`"
-    )(this.capitalNames.join("/"), this.titles.join("/"));
+    )(this.capitalNames.join(""), this.titles.join("/"));
 
     const filePath = join(
       cwd,
