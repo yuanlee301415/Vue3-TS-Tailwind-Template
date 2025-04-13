@@ -6,7 +6,6 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { createHtmlPlugin } from "vite-plugin-html";
 
-// @ts-ignore
 import pkg from "./package.json";
 
 // https://vitejs.dev/config/
