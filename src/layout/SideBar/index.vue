@@ -13,6 +13,9 @@
 <script lang="ts" setup>
 import Menu from '../Menu/index.vue'
 import { ROOT_ROUTE } from '@/router/routes'
+
+defineOptions({ name: 'SideBar' })
+
 const VITE_APP_TITLE = import.meta.env.VITE_APP_TITLE
 </script>
 

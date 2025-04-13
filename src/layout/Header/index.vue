@@ -17,6 +17,8 @@ import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 import { useUserStore } from '@/store/modules/user'
 
+defineOptions({ name: 'LayoutHeader' })
+
 const route = useRoute()
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.getUserInfo)

@@ -13,6 +13,8 @@
 import LayoutSideBar from './SideBar/index.vue'
 import LayoutHeader from './Header/index.vue'
 import LayoutContent from './Content/index.vue'
+
+defineOptions({ name: 'LayoutComponent' })
 </script>
 
 <style scoped lang="less">

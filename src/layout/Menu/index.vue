@@ -12,4 +12,7 @@
 import { basicRoutes } from '@/router/routes'
 import MenuItem from '@/layout/Menu/MenuItem.vue'
 // console.log('basicRoutes:', basicRoutes)
+
+defineOptions({ name: 'MenuComponent' })
+
 </script>
